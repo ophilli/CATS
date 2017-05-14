@@ -36,6 +36,9 @@ class Machine(models.Model):
     mach_sn = models.CharField(max_length=30)
     mach_2fa = models.BooleanField()
 
+    def __str__(self):
+        return self.hostname + " " + self.mach_type
+
 class Event(models.Model):
     mach_hostname = models.ForeignKey('Machine', on_delete=models.PROTECT)
     cuid = models.ForeignKey('User', on_delete=models.PROTECT)
