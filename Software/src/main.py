@@ -27,12 +27,12 @@ if __name__ == '__main__':
     while True:
         holdID = ID = RPICardScan()
         while (ID == holdID and holdID != None and holdID[0:5] == "02350"):
-            if(db.isUserAuthorized(ID) == True && !powerIsOn):
+            if(db.isUserAuthorized(ID) == True and not powerIsOn):
                 TurnPowerOn(ID)
-                powerIsOn = !powerIsOn
+                powerIsOn = True
 
             ID = RPICardScan()
 
         if(powerIsOn):
             TurnPowerOff(ID)
-            powerIsON = !powerIsON
+            powerIsON = False
