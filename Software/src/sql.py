@@ -63,12 +63,12 @@ class SQL():
 
         if(self.authData == None):
             print("********** USER DOES NOT EXIST *********")
-            self.statusLog(t1String, 1)
+            self.eventLog(t1String, 1)
             return(True)
 
         # USER IS NOT AUTHORIZED
         if(self.authData[0] == 0):
-            self.statusLog(t1String, 1)
+            self.eventLog(t1String, 1)
             return(True)
 
         return (self.authData)
