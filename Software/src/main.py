@@ -34,7 +34,7 @@ if __name__ == '__main__':
         holdID = ID
         while (ID == holdID and holdID != None and holdID[0:5] == "02350"):
             try:
-                author = db.setMachAuth(ID)
+                author = db.isUserAuthorized(ID)
                 # USER IS NOT AUTHORIZED SO PUT IN ID AGAIN
                 if (author == True):
                     break
@@ -52,7 +52,7 @@ if __name__ == '__main__':
 
                     # Passes through if user does not need PIN
                     # Otherwise, ask the user for a PIN
-                    if (check_opt == True):
+                    if (check_opt == True): # flag = check_opt
                         flag = True
                         break
                     else:
