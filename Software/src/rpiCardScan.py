@@ -30,9 +30,9 @@ def RPICardScan():
 
             if(len(arr) == 12):
                 length = len(arr)
-                join1 = arr[:length-1]
-                join1 = ''.join(join1)
-                return (join1)
+                cardID = arr[:length-1]
+                cardID = ''.join(cardID)
+                return (cardID)
 
         else:
             return None
