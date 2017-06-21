@@ -3,6 +3,7 @@ import os
 import subprocess
 import pymysql
 import configparser
+from on_off.py import *
 
 class SQL():
     def __init__(self):
