@@ -11,7 +11,7 @@ import configparser
 config = configparser.RawConfigParser() #instantiate config reader
 config.read(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'config.cfg')) #actually read the config file
 
-class Buzzer(object):
+class buzzer(object):
     def __init__(self):
         GPIO.setmode(GPIO.BCM)
         self.buzzer_pin = int(config.get('_buzzer', 'pin')) #set to GPIO pin 17 for CATS HAT
@@ -89,5 +89,5 @@ class Buzzer(object):
 
 if __name__ == "__main__":
     a = input("Enter Tune number 1-5:")
-    buzzer = Buzzer()
+    buzzer = buzzer()
     buzzer.play(int(a))
