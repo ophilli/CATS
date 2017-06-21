@@ -45,24 +45,23 @@ class SQL():
         else:
             self.cuid = t1String
 
-            self.cursor.execute("""INSERT IGNORE INTO `catsadmin`.`events` (`machineID`,`userID`,`status`, `t`)\
+        self.cursor.execute("""INSERT IGNORE INTO `catsadmin`.`events` (`machineID`,`userID`,`status`, `t`)\
             VALUES (%s,%s,%s,%s)""" , (self.catssn, self.cuid, status, datetime.datetime.now(),))
 
-    def setMachAuth(self, t1String):
+    def isUserAuthorized(self, t1String):
         self.cursor.execute("SELECT authType FROM machines WHERE catssn = '%s'" % self.catssn)
         self.authType = self.cursor.fetchone()
 
         try:
             self.cursor.execute("SELECT " + self.authType[0] + " FROM users WHERE t1String = " + t1String) #getting user w/ thet1String    #might need to modify
             self.authData = self.cursor.fetchone()
+        # HOSTNAME NOT FOUND
         except TypeError:
-            self.cuid = self.getID()
-            self.cursor.execute("""INSERT IGNORE INTO `catsadmin`.`events` (`machineID`,`userID`,`status`, `t`)\
-            VALUES (%s,%s,%s,%s)""" , (self.catssn, self.cuid, "5", datetime.datetime.now(),))
+            self.eventLog(t1String, 5)
             sys.exit(0)
 
+        # USER DOES NOT EXISTS
         if(self.authData == None):
-            print("********** USER DOES NOT EXIST *********")
             self.eventLog(t1String, 1)
             return(True)
 
@@ -94,8 +93,7 @@ class SQL():
 
         if(self.pin==self.pinTest and self.character == '#'): #if the pin is good
             print("********** USER EXISTS AND PIN IS GOOD *********")
-            self.cursor.execute("""INSERT IGNORE INTO `catsadmin`.`events` (`machineID`,`userID`,`status`, `t`)\
-            VALUES (%s,%s,%s,%s)""" , (self.catssn, self.cuid, "0", datetime.datetime.now(),))
+            self.eventLog(t1String, 0)
 
             TurnPowerOn()
             return(True)
