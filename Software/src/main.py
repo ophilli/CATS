@@ -25,8 +25,8 @@ if __name__ == '__main__':
     # While the same card is still being read then do the following:
     # ask for PIN and search the SQL database to find the user
     while True:
-        holdID = ID = RPICardScan()
-        while (ID == holdID and holdID != None and holdID[0:5] == "02350"):
+        ID = RPICardScan()
+        while (ID != None and ID != '~' and ID[0:5] == "02350"):
             if(db.isUserAuthorized(ID) == True and not powerIsOn):
                 TurnPowerOn(ID)
                 powerIsOn = True
@@ -34,5 +34,5 @@ if __name__ == '__main__':
             ID = RPICardScan()
 
         if(powerIsOn):
-            TurnPowerOff(ID)
+            TurnPowerOff()
             powerIsON = False
