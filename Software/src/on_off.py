@@ -17,15 +17,18 @@ power = int(config.get('_relay', 'pin'))
 io.setwarnings(False)
 io.setup(power, io.OUT)
 io.output(power, False) # Make sure Powerswitch Tail is off
+db = sql.SQL()
+lastIDtoTurnOn = ''
 
-def TurnPowerOff(ID):
+def TurnPowerOff():
     io.output(power, False)
-    eventLog(ID, 2)
+    db.eventLog(lastIDtoTurnOn, 2)
     piezo.play(5)
     led.off()
 
 def TurnPowerOn(ID):
     io.output(power, True)
-    eventLog(ID, 0)
+    db.eventLog(ID, 0)
+    lastIDtoTurnOn = ID
     piezo.play(1)
     led.on()
