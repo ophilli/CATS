@@ -63,14 +63,14 @@ class SQL():
         # USER DOES NOT EXISTS
         if(self.authData == None):
             self.eventLog(t1String, 1)
-            return(True)
+            return(False)
 
         # USER IS NOT AUTHORIZED
         if(self.authData[0] == 0):
             self.eventLog(t1String, 1)
-            return(True)
+            return(False)
 
-        return (self.authData)
+        return (self.authData[0])
 
     # twoFactorAuth: Function that searches the SQL database
     #       for an existing user with the card string
