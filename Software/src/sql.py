@@ -40,8 +40,8 @@ class SQL():
         return (self.mach2fa)
 
     def eventLog(self, t1String, status):
-        if(id[0:5] == "02350"): #we should implement the facility code as a config as well
-            self.cuid = getCUID(t1String) #getting user w/ thet1String
+        if(t1String[0:5] == "02350"): #we should implement the facility code as a config as well
+            self.cuid = self.getCUID(t1String) #getting user w/ thet1String
         else:
             self.cuid = t1String
 
