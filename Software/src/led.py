@@ -32,27 +32,27 @@ class LED(object):
         self.strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS)
 
         self.strip.begin()
-        self.strip.show()
-
-        self.strip.setPixelColor(0, self.COLOR_RED)
-        self.strip.show()
-        t.sleep(75/100)
-
-        self.strip.setPixelColor(0, self.COLOR_GREEN)
-        self.strip.show()
-        t.sleep(75/100)
-
-        self.strip.setPixelColor(0, self.COLOR_BLUE)
-        self.strip.show()
-        t.sleep(75/100)
-
-        self.strip.setPixelColor(0, self.COLOR_WHITE)
-        self.strip.show()
-        t.sleep(75/100)
-
-        self.strip.setPixelColor(0, self.COLOR_RED)
-        self.strip.show()
-        t.sleep(1)
+        # self.strip.show()
+        #
+        # self.strip.setPixelColor(0, self.COLOR_RED)
+        # self.strip.show()
+        # t.sleep(75/100)
+        #
+        # self.strip.setPixelColor(0, self.COLOR_GREEN)
+        # self.strip.show()
+        # t.sleep(75/100)
+        #
+        # self.strip.setPixelColor(0, self.COLOR_BLUE)
+        # self.strip.show()
+        # t.sleep(75/100)
+        #
+        # self.strip.setPixelColor(0, self.COLOR_WHITE)
+        # self.strip.show()
+        # t.sleep(75/100)
+        #
+        # self.strip.setPixelColor(0, self.COLOR_RED)
+        # self.strip.show()
+        # t.sleep(1)
 
 
     def off(self):
