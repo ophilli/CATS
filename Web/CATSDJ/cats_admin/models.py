@@ -81,6 +81,7 @@ class Node(models.Model):
 
 class Space(models.Model):
     node = models.OneToOneField(Node, on_delete=models.PROTECT, primary_key=True)
+    staff = models.ManyToManyField(User)
     def get_machines(self):
         return -1 # the list of machines in this space
 
