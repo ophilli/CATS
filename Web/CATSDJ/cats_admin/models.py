@@ -26,7 +26,7 @@ class Major(models.Model):
     )
 
     college = models.CharField(
-        max_length = 4,
+        max_length = 5,
         choices = COLLEGE_CHOICES,
         default = ENGINEERING,
     )
