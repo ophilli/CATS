@@ -1,18 +1,13 @@
 from django.contrib import admin
 
-from .models import Certification, User, Machine, Event
+from .models import Certification, Major, User, Node, Space, Machine, Event
 
-class UserAdmin(admin.ModelAdmin):
-    list_display = ('username', 'first_name', 'last_name', 'cuid', 'rfid', 'affiliation', 'major', 'get_certs', 'join_date')
-
-#class MachineAdmin(admin.ModelAdmin):
-    #list_display = ('hostname', 'mach_type', 'mach_sn', 'mach_2fa', 'get_certs')
-
-class EventAdmin(admin.ModelAdmin):
-    list_display = ('node', 'user', 'status', 'timestamp')
-
-admin.site.register(User, UserAdmin)
-#admin.site.register(Machine, MachineAdmin)
-admin.site.register(Event, EventAdmin)
 admin.site.register(Certification)
+admin.site.register(Major)
+admin.site.register(User)
+admin.site.register(Node)
+admin.site.register(Space)
+admin.site.register(Machine)
+admin.site.register(Event)
+
 # Register your models here.
