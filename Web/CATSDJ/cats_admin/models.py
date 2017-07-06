@@ -40,7 +40,7 @@ class Major(models.Model):
         return self.name
 
     def get_student_count(self):
-        return -1 # the number of students in this major
+        return self.user_set.count() # Returns the number of students in this major
 
 class User(models.Model):
     username = models.CharField(max_length=30, unique=True)  # Used for emails
