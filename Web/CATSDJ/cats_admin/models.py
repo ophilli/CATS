@@ -15,20 +15,26 @@ class Major(models.Model):
     name = models.CharField(max_length=30)
     code = models.CharField(max_length=30)
 
-    AGRICULTURE = 'CAFL'
-    ART = 'CAAH'
-    ENGINEERING = 'CECAS'
-    PROVOST = 'PROV'
+    AGRICULTURE = 'AGR'
+    ART = 'ART'
+    BEHAVIOR = 'BEH'
+    BUSINESS = 'BUS'
+    EDUCATION = 'EDU'
+    ENGINEERING = 'ENG'
+    SCIENCE = 'SCI'
 
     COLLEGE_CHOICES = (
         (AGRICULTURE, 'Agriculture, Foresty, Life Sciences'),
-        (ART, 'Art, Architecture, and Humanities'),
+        (ART, 'Architecture, Arts and Humanities'),
+        (BEHAVIOR, 'Behavioral, Social and Health Sciences'),
+        (BUSINESS, 'Business'),
+        (EDUCATION, 'Education'),
         (ENGINEERING, 'Engineering, Computing and Applied Sciences'),
-        (PROVOST, 'Provost'),
+        (SCIENCE, 'Science'),
     )
 
     college = models.CharField(
-        max_length = 5,
+        max_length = 3,
         choices = COLLEGE_CHOICES,
         default = ENGINEERING,
     )
