@@ -1,13 +1,15 @@
 import datetime
 
 from django.db import models
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 
 class Certification(models.Model):
-    cert_name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30)
     # Expiration datetime
     # Prerequisite
     def __str__(self):
-        return self.cert_name
+        return self.name
 
 class Major(models.Model):
     name = models.CharField(max_length=30)
@@ -30,6 +32,9 @@ class Major(models.Model):
         choices = COLLEGE_CHOICES,
         default = ENGINEERING,
     )
+
+    def __str__(self):
+        return self.name
 
     def get_student_count(self):
         return -1 # the number of students in this major
@@ -79,28 +84,27 @@ class Node(models.Model):
     name = models.CharField(max_length=30)
     certs = models.ManyToManyField(Certification)
 
-class Space(models.Model):
-    node = models.OneToOneField(Node, on_delete=models.PROTECT, primary_key=True)
+    def __str__(self):
+        return self.name
+
+class Space(Node):
     staff = models.ManyToManyField(User)
     def get_machines(self):
         return -1 # the list of machines in this space
 
-class Machine(models.Model):
-    node = models.OneToOneField(Node, on_delete=models.PROTECT, primary_key=True)
+class Machine(Node):
     manufacturer = models.CharField(max_length=30)
     model = models.CharField(max_length=30)
     serial = models.CharField(max_length=30)
-    space = models.ForeignKey(Space, on_delete=models.PROTECT) # Protect the machines from being deleted if a space is deleted
+    location = models.ForeignKey(Space, on_delete=models.PROTECT) # Protect the machines from being deleted if a space is deleted
 
     def get_certs(self):
         return "\n".join([c.cert_name for c in self.cert_group.all()])
 
-    def __str__(self):
-        return self.hostname + " " + self.mach_type
-
 class Event(models.Model):
     timestamp = models.DateTimeField('Time of Event', primary_key=True)
-    node = models.ForeignKey('Node', on_delete=models.PROTECT) # Protect the event form being deleted if a node is deleted
+    
+    node = models.ForeignKey('Node', on_delete=models.PROTECT)
     user = models.ForeignKey('User', on_delete=models.PROTECT)
 
     SUCCESS = 'SE'
