@@ -1,8 +1,5 @@
 import datetime
-
 from django.db import models
-from django.contrib.contenttypes.fields import GenericForeignKey
-from django.contrib.contenttypes.models import ContentType
 
 class Certification(models.Model):
     name = models.CharField(max_length=30)
