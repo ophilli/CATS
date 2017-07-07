@@ -90,19 +90,20 @@ class Node(models.Model):
     def __str__(self):
         return self.name
 
+    def get_certs(self):
+        return "\n".join([c.name for c in self.certs.all()])
+
 class Space(Node):
     staff = models.ManyToManyField(User)
-    def get_machines(self):
-        return -1 # the list of machines in this space
+
+    def get_machine_count(self):
+        return self.machine_set.count() # the list of machines in this space
 
 class Machine(Node):
     manufacturer = models.CharField(max_length=30)
     model = models.CharField(max_length=30)
     serial = models.CharField(max_length=30)
     location = models.ForeignKey(Space, on_delete=models.PROTECT) # Protect the machines from being deleted if a space is deleted
-
-    def get_certs(self):
-        return "\n".join([c.cert_name for c in self.cert_group.all()])
 
 class Event(models.Model):
     timestamp = models.DateTimeField('Time of Event', auto_now_add=True, primary_key=True)

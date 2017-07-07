@@ -11,11 +11,17 @@ class UserAdmin(admin.ModelAdmin):
     list_filter = ['major',]
     search_fields = ['username']
 
+class SpaceAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'get_machine_count', 'get_certs')
+
+class MachineAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'get_certs')
+
 admin.site.register(Certification)
 admin.site.register(Major, MajorAdmin)
 admin.site.register(User, UserAdmin)
-admin.site.register(Space)
-admin.site.register(Machine)
+admin.site.register(Space, SpaceAdmin)
+admin.site.register(Machine, MachineAdmin)
 admin.site.register(Event)
 
 # Register your models here.
